@@ -1,0 +1,26 @@
+{
+    "page": 1,
+    "results": [
+        {
+            "backdrop_path": "/pdfCr8W0wBCpdjbZXSxnKhZtosP.jpg",
+            "first_air_date": "2022-09-01",
+            "genre_ids": [
+                10765,
+                10759,
+                18
+            ],
+            "id": 84773,
+            "name": "The Lord of the Rings: The Rings of Power",
+            "origin_country": [
+                "US"
+            ],
+            "original_language": "en",
+            "original_name": "The Lord of the Rings: The Rings of Power",
+            "overview": "Beginning in a time of relative peace, we follow an ensemble cast of characters as they confront the re-emergence of evil to Middle-earth. From the darkest depths of the Misty Mountains, to the majestic forests of Lindon, to the breathtaking island kingdom of Númenor, to the furthest reaches of the map, these kingdoms and characters will carve out legacies that live on long after they are gone.",
+            "popularity": 4857.259,
+            "poster_path": "/suyNxglk17Cpk8rCM2kZgqKdftk.jpg",
+            "vote_average": 7.6,
+            "vote_count": 695
+        }
+    ]
+}

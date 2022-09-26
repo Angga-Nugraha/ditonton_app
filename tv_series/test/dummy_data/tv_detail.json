@@ -1,0 +1,38 @@
+{
+    "adult": false,
+    "backdrop_path": "/backdrop_path.jpg",
+    "episode_run_time": [
+        60
+    ],
+    "genres": [
+        {
+            "id": 18,
+            "name": "Drama"
+        }
+    ],
+    "homepage": "https://www.fujitv.co.jp/b_hp/m9_pride/",
+    "id": 1,
+    "name": "Pride",
+    "number_of_episodes": 11,
+    "number_of_seasons": 1,
+    "original_name": "プライド",
+    "overview": "The theme is strength and gallantry.Haru Satonaka is the captain of an ice-hockey team, a star athlete who stakes everything on hockey but can only consider love as a game. Aki Murase is a woman who has been waiting for her lover who went abroad two years ago. These two persons start a relationship while frankly admitting to each other that it is only a love game. …The result is the unfolding of a drama of people with their respective pasts and with their pride as individuals.",
+    "popularity": 4.352,
+    "poster_path": "/9Ub2BwnLYKoiSaQF93ItyXriCon.jpg",
+    "seasons": [
+        {
+            "air_date": "2004-01-12",
+            "episode_count": 11,
+            "id": 2328126,
+            "name": "Season 1",
+            "overview": "",
+            "poster_path": "/nCcGD18HmDFunCl8KBigqUPlIi8.jpg",
+            "season_number": 1
+        }
+    ],
+    "status": "status",
+    "tagline": "tagline",
+    "type": "type",
+    "vote_average": 8.136,
+    "vote_count": 11
+}
