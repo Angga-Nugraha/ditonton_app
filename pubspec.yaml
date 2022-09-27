@@ -30,6 +30,7 @@ dependencies:
   provider: ^6.0.3
   search:
     path: search
+  test_cov_console: ^0.2.2
   tv_series:
     path: tv_series
 

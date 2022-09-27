@@ -3,6 +3,24 @@ import 'package:movie/domain/entities/genre.dart';
 import 'package:movie/domain/entities/movie.dart';
 import 'package:movie/domain/entities/movie_detail.dart';
 
+final tMovie = Movie(
+  adult: false,
+  backdropPath: 'backdropPath',
+  genreIds: const [1, 2, 3],
+  id: 1,
+  originalTitle: 'originalTitle',
+  overview: 'overview',
+  popularity: 1,
+  posterPath: 'posterPath',
+  releaseDate: 'releaseDate',
+  title: 'title',
+  video: false,
+  voteAverage: 1,
+  voteCount: 1,
+);
+
+final tMovieList = <Movie>[tMovie];
+
 final testMovie = Movie(
   adult: false,
   backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',

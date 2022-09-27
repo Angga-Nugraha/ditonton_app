@@ -82,11 +82,3 @@ hvcNAQELBQADggEBABpzoRDnIsdErQcTPaQduN8IVH/QZJVKn4OtPEO4fTzxqhvJ
 rFAzldB7viRdim3SimkGfZdRFJz3+Uzs+ewdaDkclhOyADMaDnJadgZHil/jZP3E
 m/IyZOLJ6P1ZltyRhJ6ak/1xxoMTH7wk4FMZ47k=
 -----END CERTIFICATE-----""";
-
-// import 'package:http/http.dart' as http;
-
-// class HttpSSLPinning {
-//   static Future<http.Client> get _instance async {
-//     _clientInstance ??= await Shared.createLEClient();
-//   }
-// }

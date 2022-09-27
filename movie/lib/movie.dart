@@ -34,6 +34,6 @@ export 'package:movie/presentation/pages/home_movie_page.dart';
 export 'package:movie/presentation/pages/movie_detail_page.dart';
 export 'package:movie/presentation/pages/popular_movies_page.dart';
 export 'package:movie/presentation/pages/top_rated_movies_page.dart';
+export 'package:movie/presentation/pages/watchlist_page.dart';
 export 'package:movie/presentation/widgets/movie_card_list.dart';
 export 'package:movie/presentation/widgets/recomendations_movie_list.dart';
-export 'package:movie/presentation/widgets/watchlist_movie.dart';

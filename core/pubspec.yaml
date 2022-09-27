@@ -20,6 +20,8 @@ dependencies:
   encrypt: ^5.0.1
   sqflite_sqlcipher: ^2.1.1+1
   firebase_crashlytics: ^2.8.11
+  flutter_bloc: ^8.0.0
+  equatable: ^2.0.2
 
 dev_dependencies:
   flutter_test:

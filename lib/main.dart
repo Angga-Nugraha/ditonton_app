@@ -1,14 +1,15 @@
 import 'package:core/data/ssl_pinning.dart';
+import 'package:core/presentation/bloc/watchlist_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie/presentation/bloc/detail_movie_bloc.dart';
+import 'package:movie/presentation/bloc/playing_now_movie_bloc.dart';
+import 'package:movie/presentation/bloc/popular_movie_bloc.dart';
+import 'package:movie/presentation/bloc/recommendation_movie_bloc.dart';
+import 'package:movie/presentation/bloc/top_rated_movie_bloc.dart';
+import 'package:movie/presentation/bloc/watchlist_movie_bloc.dart';
 import 'package:provider/provider.dart';
-
-import 'package:core/presentation/movie/provider/movie_detail_notifier.dart';
-import 'package:core/presentation/movie/provider/movie_list_notifier.dart';
-import 'package:core/presentation/movie/provider/popular_movies_notifier.dart';
-import 'package:core/presentation/movie/provider/top_rated_movies_notifier.dart';
-import 'package:core/presentation/movie/provider/watchlist_movie_notifier.dart';
 import 'package:core/presentation/tv/provider/detail_tv_notifier.dart';
 import 'package:core/presentation/tv/provider/list_tv__notifier.dart';
 import 'package:core/presentation/tv/provider/popular_tv_notifier.dart';
@@ -16,7 +17,6 @@ import 'package:core/presentation/tv/provider/season_tv_notifier.dart';
 import 'package:core/presentation/tv/provider/top_rated_tv_notifier.dart';
 import 'package:core/presentation/tv/provider/watchlist_tv_notifier.dart';
 
-import 'package:core/presentation/watchlist_page.dart';
 import 'package:submission_akhir/injection.dart' as di;
 
 import 'package:movie/movie.dart';
@@ -40,32 +40,38 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieListNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<PlayingNowMovieBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TopRatedMovieBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<PopularMovieBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<DetailMovieBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<RecommendationMovieBloc>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TVListNotifier>(),
         ),
         ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
-        ),
-        ChangeNotifierProvider(
           create: (_) => di.locator<TVDetailNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<TopRatedTVNotifier>(),
         ),
         ChangeNotifierProvider(
-          create: (_) => di.locator<PopularMoviesNotifier>(),
-        ),
-        ChangeNotifierProvider(
           create: (_) => di.locator<PopularTVNotifier>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistMovieNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<WatchlistMovieBloc>(),
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistTVNotifier>(),

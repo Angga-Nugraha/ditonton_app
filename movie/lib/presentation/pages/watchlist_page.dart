@@ -1,9 +1,12 @@
-import 'package:core/presentation/movie/provider/watchlist_movie_notifier.dart';
-import 'package:core/presentation/tv/provider/watchlist_tv_notifier.dart';
-import 'package:core/utils/utils.dart';
-import 'package:flutter/material.dart';
-import 'package:movie/presentation/widgets/watchlist_movie.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+
+import 'package:core/utils/utils.dart';
+import 'package:core/presentation/tv/provider/watchlist_tv_notifier.dart';
+
+import 'package:movie/presentation/bloc/watchlist_movie_bloc.dart';
+import 'package:movie/presentation/widgets/watchlist_movie.dart';
+
 import 'package:tv_series/presentation/widgets/watchlist_tv.dart';
 
 class WatchListPage extends StatefulWidget {
@@ -22,8 +25,8 @@ class _WatchListPageState extends State<WatchListPage>
     _controller = TabController(length: 2, vsync: this);
     super.initState();
     Future.microtask(() {
-      Provider.of<WatchlistMovieNotifier>(context, listen: false)
-          .fetchWatchlistMovies();
+      Provider.of<WatchlistMovieBloc>(context, listen: false)
+          .add(FetchMovieWatchlist());
       Provider.of<WatchlistTVNotifier>(context, listen: false)
           .fetchWatchlistTV();
     });
@@ -37,8 +40,8 @@ class _WatchListPageState extends State<WatchListPage>
 
   @override
   void didPopNext() {
-    Provider.of<WatchlistMovieNotifier>(context, listen: false)
-        .fetchWatchlistMovies();
+    Provider.of<WatchlistMovieBloc>(context, listen: false)
+        .add(FetchMovieWatchlist());
     Provider.of<WatchlistTVNotifier>(context, listen: false).fetchWatchlistTV();
   }
 
