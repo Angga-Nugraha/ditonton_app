@@ -16,28 +16,31 @@ dependencies:
   build_runner: ^2.2.1
   core:
     path: core
-  cupertino_icons: ^1.0.2
-  encrypt: ^5.0.1
-  firebase_core: ^1.23.0
-  firebase_crashlytics: ^2.8.11
-  flutter:
-    sdk: flutter
-  flutter_bloc: ^8.1.1
-  get_it: ^7.1.3
-  http: ^0.13.3
   movie:
     path: movie
   provider: ^6.0.3
   search:
     path: search
-  test_cov_console: ^0.2.2
   tv_series:
     path: tv_series
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  encrypt: ^5.0.1
+  firebase_core: ^1.23.0
+  firebase_crashlytics: ^2.8.11
+  flutter_bloc: ^8.1.1
+  get_it: ^7.1.3
+  http: ^0.13.3
+  test_cov_console: ^0.2.2
 
 dev_dependencies:
-  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
+  mockito: ^5.0.8
+  bloc_test: ^9.0.0
+  mocktail: ^0.3.0
+  flutter_lints: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
