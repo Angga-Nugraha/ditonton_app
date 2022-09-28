@@ -2,10 +2,10 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:core/utils/utils.dart';
-import 'package:core/presentation/tv/provider/watchlist_tv_notifier.dart';
 
 import 'package:movie/presentation/bloc/watchlist_movie_bloc.dart';
 import 'package:movie/presentation/widgets/watchlist_movie.dart';
+import 'package:tv_series/presentation/provider/watchlist_tv_notifier.dart';
 
 import 'package:tv_series/presentation/widgets/watchlist_tv.dart';
 

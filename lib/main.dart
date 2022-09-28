@@ -10,16 +10,16 @@ import 'package:movie/presentation/bloc/recommendation_movie_bloc.dart';
 import 'package:movie/presentation/bloc/top_rated_movie_bloc.dart';
 import 'package:movie/presentation/bloc/watchlist_movie_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:core/presentation/tv/provider/detail_tv_notifier.dart';
-import 'package:core/presentation/tv/provider/list_tv__notifier.dart';
-import 'package:core/presentation/tv/provider/popular_tv_notifier.dart';
-import 'package:core/presentation/tv/provider/season_tv_notifier.dart';
-import 'package:core/presentation/tv/provider/top_rated_tv_notifier.dart';
-import 'package:core/presentation/tv/provider/watchlist_tv_notifier.dart';
 
 import 'package:submission_akhir/injection.dart' as di;
 
 import 'package:movie/movie.dart';
+import 'package:tv_series/presentation/provider/detail_tv_notifier.dart';
+import 'package:tv_series/presentation/provider/list_tv__notifier.dart';
+import 'package:tv_series/presentation/provider/popular_tv_notifier.dart';
+import 'package:tv_series/presentation/provider/season_tv_notifier.dart';
+import 'package:tv_series/presentation/provider/top_rated_tv_notifier.dart';
+import 'package:tv_series/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:tv_series/tv_series.dart';
 import 'package:core/core.dart';
 import 'package:search/search.dart';

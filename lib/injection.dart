@@ -2,13 +2,6 @@ import 'package:get_it/get_it.dart';
 
 import 'package:core/data/ssl_pinning.dart';
 import 'package:core/presentation/bloc/watchlist_bloc.dart';
-import 'package:core/presentation/watchlist_movie_notifier.dart';
-import 'package:core/presentation/tv/provider/detail_tv_notifier.dart';
-import 'package:core/presentation/tv/provider/list_tv__notifier.dart';
-import 'package:core/presentation/tv/provider/popular_tv_notifier.dart';
-import 'package:core/presentation/tv/provider/season_tv_notifier.dart';
-import 'package:core/presentation/tv/provider/top_rated_tv_notifier.dart';
-import 'package:core/presentation/tv/provider/watchlist_tv_notifier.dart';
 
 import 'package:movie/presentation/bloc/detail_movie_bloc.dart';
 import 'package:movie/presentation/bloc/playing_now_movie_bloc.dart';
@@ -20,6 +13,12 @@ import 'package:movie/presentation/bloc/watchlist_movie_bloc.dart';
 import 'package:core/core.dart';
 import 'package:search/search.dart';
 import 'package:movie/movie.dart';
+import 'package:tv_series/presentation/provider/detail_tv_notifier.dart';
+import 'package:tv_series/presentation/provider/list_tv__notifier.dart';
+import 'package:tv_series/presentation/provider/popular_tv_notifier.dart';
+import 'package:tv_series/presentation/provider/season_tv_notifier.dart';
+import 'package:tv_series/presentation/provider/top_rated_tv_notifier.dart';
+import 'package:tv_series/presentation/provider/watchlist_tv_notifier.dart';
 import 'package:tv_series/tv_series.dart';
 
 final locator = GetIt.instance;
@@ -74,11 +73,6 @@ void init() {
   locator.registerFactory(
     () => SearchTVBloc(
       locator(),
-    ),
-  );
-  locator.registerFactory(
-    () => WatchlistMovieNotifier(
-      getWatchlistMovies: locator(),
     ),
   );
 
