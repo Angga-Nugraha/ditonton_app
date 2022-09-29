@@ -8,5 +8,5 @@ String readJson(String name) {
   if (dir.endsWith('movie')) {
     return File('$dir/test/$name').readAsStringSync();
   }
-  return File('$dir/test/$name').readAsStringSync();
+  return File('$dir/movie/$name').readAsStringSync();
 }
