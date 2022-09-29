@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:sqflite_sqlcipher/sqflite.dart';
 import 'package:core/utils/encrypt.dart';
 
@@ -27,7 +28,7 @@ class DatabaseHelper {
     final path = await getDatabasesPath();
     final databasePath = '$path/ditonton.db';
 
-    print(databasePath);
+    debugPrint(databasePath);
 
     var db = await openDatabase(
       databasePath,
