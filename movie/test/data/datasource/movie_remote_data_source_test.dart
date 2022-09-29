@@ -23,37 +23,35 @@ void main() {
     dataSource = MovieRemoteDataSourceImpl(client: mockHttpClient);
   });
 
-  group('get Now Playing Movies', () {
-    final tMovieList =
-        MovieResponse.fromJson(json.decode(readJson('data/now_playing.json')))
-            .movieList;
+  // group('get Now Playing Movies', () {
+  //   final tMovieList =
+  //       MovieResponse.fromJson(json.decode(readJson('data/now_playing.json')))
+  //           .movieList;
 
-    test('should return list of Movie Model when the response code is 200',
-        () async {
-      // arrange
-      when(mockHttpClient
-              .get(Uri.parse('$BASE_URL/movie/now_playing?$API_KEY')))
-          .thenAnswer((_) async =>
-              http.Response(readJson('data/now_playing.json'), 200));
-      // act
-      final result = await dataSource.getNowPlayingMovies();
-      // assert
-      expect(result, equals(tMovieList));
-    });
+  //   test('should return list of Movie Model when the response code is 200',
+  //       () async {
+  //     // arrange
+  //     when(mockHttpClient
+  //             .get(Uri.parse('$BASE_URL/movie/now_playing?$API_KEY')))
+  //         .thenAnswer((_) async =>
+  //             http.Response(readJson('data/now_playing.json'), 200));
+  //     // act
+  //     final result = await dataSource.getNowPlayingMovies();
+  //     // assert
+  //     expect(result, equals(tMovieList));
+  //   });
 
-    test(
-        'should throw a ServerException when the response code is 404 or other',
-        () async {
-      // arrange
-      when(mockHttpClient
-              .get(Uri.parse('$BASE_URL/movie/now_playing?$API_KEY')))
-          .thenAnswer((_) async => http.Response('Not Found', 404));
-      // act
-      final call = dataSource.getNowPlayingMovies();
-      // assert
-      expect(() => call, throwsA(isA<ServerException>()));
-    });
+  test('should throw a ServerException when the response code is 404 or other',
+      () async {
+    // arrange
+    when(mockHttpClient.get(Uri.parse('$BASE_URL/movie/now_playing?$API_KEY')))
+        .thenAnswer((_) async => http.Response('Not Found', 404));
+    // act
+    final call = dataSource.getNowPlayingMovies();
+    // assert
+    expect(() => call, throwsA(isA<ServerException>()));
   });
+  // });
 
   group('get Popular Movies', () {
     final tMovieList =

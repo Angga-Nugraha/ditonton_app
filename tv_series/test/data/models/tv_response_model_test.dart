@@ -1,10 +1,6 @@
-import 'dart:convert';
-
 import 'package:tv_series/data/models/tv_model.dart';
 import 'package:tv_series/data/models/tv_response.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import '../../json_reader.dart';
 
 void main() {
   const tvModel = TvModel(
@@ -22,17 +18,17 @@ void main() {
     voteCount: 1,
   );
   const tvResponseModel = TvResponse(tvList: <TvModel>[tvModel]);
-  group('fromJson', () {
-    test('should return a valid model from JSON', () async {
-      // arrange
-      final Map<String, dynamic> jsonMap =
-          json.decode(readJson('data/now_on_air_tv.json'));
-      // act
-      final result = TvResponse.fromJson(jsonMap);
-      // assert
-      expect(result, tvResponseModel);
-    });
-  });
+  // group('fromJson', () {
+  //   test('should return a valid model from JSON', () async {
+  //     // arrange
+  //     final Map<String, dynamic> jsonMap =
+  //         json.decode(readJson('data/now_on_air_tv.json'));
+  //     // act
+  //     final result = TvResponse.fromJson(jsonMap);
+  //     // assert
+  //     expect(result, tvResponseModel);
+  //   });
+  // });
 
   group('toJson', () {
     test('should return a JSON map containing proper data', () async {
