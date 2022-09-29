@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:movie/movie.dart';
 import 'package:tv_series/tv_series.dart';
 

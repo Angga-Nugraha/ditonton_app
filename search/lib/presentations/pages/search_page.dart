@@ -1,8 +1,10 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie/presentation/widgets/movie_card_list.dart';
+
 import 'package:search/presentations/bloc/search_bloc.dart';
+
+import 'package:core/core.dart';
+import 'package:movie/movie.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);

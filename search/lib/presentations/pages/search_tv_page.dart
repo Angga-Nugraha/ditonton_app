@@ -1,8 +1,10 @@
-import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:search/presentations/bloc/search_bloc.dart';
-import 'package:tv_series/presentation/widgets/tv_card_list.dart';
+
+import 'package:core/core.dart';
+import 'package:tv_series/tv_series.dart';
 
 class SearchTVPage extends StatelessWidget {
   const SearchTVPage({Key? key}) : super(key: key);

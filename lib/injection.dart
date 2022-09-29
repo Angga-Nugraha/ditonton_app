@@ -1,25 +1,11 @@
-import 'package:core/watchlist/bloc/watchlist_bloc.dart';
 import 'package:get_it/get_it.dart';
 
+import 'package:core/watchlist/bloc/watchlist_bloc.dart';
 import 'package:core/data/ssl_pinning.dart';
-
-import 'package:movie/presentation/bloc/detail_movie_bloc.dart';
-import 'package:movie/presentation/bloc/playing_now_movie_bloc.dart';
-import 'package:movie/presentation/bloc/popular_movie_bloc.dart';
-import 'package:movie/presentation/bloc/recommendation_movie_bloc.dart';
-import 'package:movie/presentation/bloc/top_rated_movie_bloc.dart';
-import 'package:movie/presentation/bloc/watchlist_movie_bloc.dart';
 
 import 'package:core/core.dart';
 import 'package:search/search.dart';
 import 'package:movie/movie.dart';
-import 'package:tv_series/presentation/bloc/playing_now_tv_bloc.dart';
-import 'package:tv_series/presentation/bloc/popular_tv_bloc.dart';
-import 'package:tv_series/presentation/bloc/season_tv_bloc.dart';
-import 'package:tv_series/presentation/bloc/top_rated_tv_bloc.dart';
-import 'package:tv_series/presentation/bloc/tv_detail_bloc.dart';
-import 'package:tv_series/presentation/bloc/recommendations_tv_bloc.dart';
-import 'package:tv_series/presentation/bloc/watchlist_tv_bloc.dart';
 import 'package:tv_series/tv_series.dart';
 
 final locator = GetIt.instance;

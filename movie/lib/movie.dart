@@ -37,3 +37,10 @@ export 'package:movie/presentation/pages/top_rated_movies_page.dart';
 export 'package:movie/presentation/pages/watchlist_page.dart';
 export 'package:movie/presentation/widgets/movie_card_list.dart';
 export 'package:movie/presentation/widgets/recomendations_movie_list.dart';
+
+export 'package:movie/presentation/bloc/detail_movie_bloc.dart';
+export 'package:movie/presentation/bloc/playing_now_movie_bloc.dart';
+export 'package:movie/presentation/bloc/popular_movie_bloc.dart';
+export 'package:movie/presentation/bloc/recommendation_movie_bloc.dart';
+export 'package:movie/presentation/bloc/top_rated_movie_bloc.dart';
+export 'package:movie/presentation/bloc/watchlist_movie_bloc.dart';

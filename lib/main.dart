@@ -1,26 +1,15 @@
-import 'package:core/data/ssl_pinning.dart';
-import 'package:core/watchlist/bloc/watchlist_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie/presentation/bloc/detail_movie_bloc.dart';
-import 'package:movie/presentation/bloc/playing_now_movie_bloc.dart';
-import 'package:movie/presentation/bloc/popular_movie_bloc.dart';
-import 'package:movie/presentation/bloc/recommendation_movie_bloc.dart';
-import 'package:movie/presentation/bloc/top_rated_movie_bloc.dart';
-import 'package:movie/presentation/bloc/watchlist_movie_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 
+import 'package:submission_akhir/firebase_options.dart';
 import 'package:submission_akhir/injection.dart' as di;
+import 'package:core/data/ssl_pinning.dart';
+import 'package:core/watchlist/bloc/watchlist_bloc.dart';
 
 import 'package:movie/movie.dart';
-import 'package:tv_series/presentation/bloc/playing_now_tv_bloc.dart';
-import 'package:tv_series/presentation/bloc/popular_tv_bloc.dart';
-import 'package:tv_series/presentation/bloc/recommendations_tv_bloc.dart';
-import 'package:tv_series/presentation/bloc/season_tv_bloc.dart';
-import 'package:tv_series/presentation/bloc/top_rated_tv_bloc.dart';
-import 'package:tv_series/presentation/bloc/tv_detail_bloc.dart';
-import 'package:tv_series/presentation/bloc/watchlist_tv_bloc.dart';
 import 'package:tv_series/tv_series.dart';
 import 'package:core/core.dart';
 import 'package:search/search.dart';
@@ -28,9 +17,9 @@ import 'package:about/about_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(
-  //   options: DefaultFirebaseOptions.currentPlatform,
-  // );
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   await HttpSSLPinning.init();
   di.init();
   runApp(MyApp());
