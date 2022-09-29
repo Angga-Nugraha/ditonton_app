@@ -9,3 +9,4 @@
 ![image](https://user-images.githubusercontent.com/76716099/193021969-27ec7bf7-44ce-4f1b-90ca-b280e13355e7.png)
 ## Status Build From CodeMagic
 ![image](https://user-images.githubusercontent.com/76716099/193026937-24a3b58f-6a8a-4553-a574-a7c2090bc524.png)
+![image](https://user-images.githubusercontent.com/76716099/193027459-dc3956f0-01ee-4c2d-b3dd-2b741c1439b2.png)
