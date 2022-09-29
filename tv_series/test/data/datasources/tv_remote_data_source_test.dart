@@ -32,7 +32,7 @@ void main() {
       // arrange
       when(mockHttpClient.get(Uri.parse('$BASE_URL/tv/on_the_air?$API_KEY')))
           .thenAnswer((_) async =>
-              http.Response(readJson('data/now_on_air_tv.json'), 200));
+              http.Response(readJson('dummy_data/now_on_air_tv.json'), 200));
       // act
       final result = await dataSource.getNowPlayingTv();
       // assert
