@@ -1,4 +1,7 @@
-# submission_akhir
+# submission_akhir Aplikasi ditonton dengan menerapkan clean Architecture dan modularization
+
+## Status Badge
+![CodeMagic](https://api.codemagic.io/apps/6333f9206e6d53eccd9f4cc4/6333f9206e6d53eccd9f4cc3/status_badge.svg)&nbsp;
 
 A new Flutter project.
 
