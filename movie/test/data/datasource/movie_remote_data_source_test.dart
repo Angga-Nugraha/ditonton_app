@@ -24,9 +24,9 @@ void main() {
   });
 
   group('get Now Playing Movies', () {
-    final tMovieList = MovieResponse.fromJson(
-            json.decode(readJson('dummy_data/now_playing.json')))
-        .movieList;
+    final tMovieList =
+        MovieResponse.fromJson(json.decode(readJson('data/now_playing.json')))
+            .movieList;
 
     test('should return list of Movie Model when the response code is 200',
         () async {
@@ -34,7 +34,7 @@ void main() {
       when(mockHttpClient
               .get(Uri.parse('$BASE_URL/movie/now_playing?$API_KEY')))
           .thenAnswer((_) async =>
-              http.Response(readJson('dummy_data/now_playing.json'), 200));
+              http.Response(readJson('data/now_playing.json'), 200));
       // act
       final result = await dataSource.getNowPlayingMovies();
       // assert

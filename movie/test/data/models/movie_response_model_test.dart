@@ -22,13 +22,14 @@ void main() {
     voteAverage: 1.0,
     voteCount: 1,
   );
+
   const tMovieResponseModel =
       MovieResponse(movieList: <MovieModel>[tMovieModel]);
   group('fromJson', () {
     test('should return a valid model from JSON', () async {
       // arrange
       final Map<String, dynamic> jsonMap =
-          json.decode(readJson('dummy_data/now_playing.json'));
+          json.decode(readJson('data/now_playing.json'));
       // act
       final result = MovieResponse.fromJson(jsonMap);
       // assert
