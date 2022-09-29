@@ -1,5 +1,5 @@
 import 'package:core/data/ssl_pinning.dart';
-import 'package:core/presentation/bloc/watchlist_bloc.dart';
+import 'package:core/watchlist/bloc/watchlist_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,7 +1,7 @@
+import 'package:core/watchlist/bloc/watchlist_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:core/data/ssl_pinning.dart';
-import 'package:core/presentation/bloc/watchlist_bloc.dart';
 
 import 'package:movie/presentation/bloc/detail_movie_bloc.dart';
 import 'package:movie/presentation/bloc/playing_now_movie_bloc.dart';
