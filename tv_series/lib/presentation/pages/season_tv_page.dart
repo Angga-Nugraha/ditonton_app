@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv_series/domain/entities/season_detail.dart';
-import 'package:core/presentation/tv/provider/season_tv_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
+import 'package:tv_series/presentation/bloc/season_tv_bloc.dart';
 
 class SeasonTVPage extends StatefulWidget {
   final int id;
@@ -22,28 +23,31 @@ class _SeasonTVPageState extends State<SeasonTVPage> {
   void initState() {
     super.initState();
     Future.microtask(
-      () => Provider.of<SeasonTVNotifier>(context, listen: false)
-          .fetchTVSeason(widget.id, widget.numSeason),
+      () => Provider.of<SeasonTVBloc>(context, listen: false)
+          .add(FetchSeasonTV(widget.id, widget.numSeason)),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<SeasonTVNotifier>(
-        builder: (context, provider, child) {
-          if (provider.state == RequestState.Loading) {
+      body: BlocBuilder<SeasonTVBloc, SeasonTVState>(
+        builder: (context, state) {
+          if (state is SeasonTVLoading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (provider.state == RequestState.Loaded) {
-            final seasons = provider.season;
+          } else if (state is SeasonTVHasData) {
+            final seasons = state.result;
 
             return SafeArea(
               child: DetailSeason(seasons),
             );
           } else {
-            return Text(provider.message);
+            return const Center(
+              key: Key('error message'),
+              child: Text('Failed'),
+            );
           }
         },
       ),

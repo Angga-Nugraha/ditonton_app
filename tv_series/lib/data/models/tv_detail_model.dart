@@ -31,7 +31,7 @@ class TvDetailResponse extends Equatable {
   final List<int> episodeRunTime;
   final List<GenreModel> genres;
   final String homepage;
-  final int? id;
+  final int id;
   final String? name;
   final int numberOfEpisodes;
   final int numberOfSeasons;

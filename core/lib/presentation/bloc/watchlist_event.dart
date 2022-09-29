@@ -51,3 +51,12 @@ class LoadWatchlistStatus extends WatchlistEvent {
   @override
   List<Object> get props => [id];
 }
+
+class LoadWatchlistTVStatus extends WatchlistEvent {
+  final int id;
+
+  const LoadWatchlistTVStatus(this.id);
+
+  @override
+  List<Object> get props => [id];
+}

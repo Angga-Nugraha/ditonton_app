@@ -13,12 +13,13 @@ import 'package:movie/presentation/bloc/watchlist_movie_bloc.dart';
 import 'package:core/core.dart';
 import 'package:search/search.dart';
 import 'package:movie/movie.dart';
-import 'package:tv_series/presentation/provider/detail_tv_notifier.dart';
-import 'package:tv_series/presentation/provider/list_tv__notifier.dart';
-import 'package:tv_series/presentation/provider/popular_tv_notifier.dart';
-import 'package:tv_series/presentation/provider/season_tv_notifier.dart';
-import 'package:tv_series/presentation/provider/top_rated_tv_notifier.dart';
-import 'package:tv_series/presentation/provider/watchlist_tv_notifier.dart';
+import 'package:tv_series/presentation/bloc/playing_now_tv_bloc.dart';
+import 'package:tv_series/presentation/bloc/popular_tv_bloc.dart';
+import 'package:tv_series/presentation/bloc/season_tv_bloc.dart';
+import 'package:tv_series/presentation/bloc/top_rated_tv_bloc.dart';
+import 'package:tv_series/presentation/bloc/tv_detail_bloc.dart';
+import 'package:tv_series/presentation/bloc/recommendations_tv_bloc.dart';
+import 'package:tv_series/presentation/bloc/watchlist_tv_bloc.dart';
 import 'package:tv_series/tv_series.dart';
 
 final locator = GetIt.instance;
@@ -57,6 +58,7 @@ void init() {
       saveWatchlist: locator(),
       removeWatchlistTV: locator(),
       saveWatchlistTV: locator(),
+      getWatchListTVStatus: locator(),
     ),
   );
   locator.registerFactory(
@@ -77,38 +79,35 @@ void init() {
   );
 
   locator.registerFactory(
-    () => SeasonTVNotifier(seasonTV: locator()),
+    () => PlayingNowTVBloc(locator()),
   );
 
-  // provider tv
   locator.registerFactory(
-    () => TVListNotifier(
-      getNowPlayingTV: locator(),
-      getPopularTV: locator(),
-      getTopRatedTV: locator(),
+    () => PopularTVBloc(locator()),
+  );
+
+  locator.registerFactory(
+    () => RecommendationTVBloc(
+      getTVRecommendation: locator(),
     ),
   );
+
   locator.registerFactory(
-    () => PopularTVNotifier(locator()),
+    () => WatchlistTVBloc(getWatchlistTVs: locator()),
+  );
+
+  locator.registerFactory(
+    () => SeasonTVBloc(
+      getTVSeason: locator(),
+    ),
   );
   locator.registerLazySingleton(
-    () => TVDetailNotifier(
-        getTvDetail: locator(),
-        getTvRecommendations: locator(),
-        getWatchListStatus: locator(),
-        saveWatchlist: locator(),
-        removeWatchlist: locator()),
-  );
-  locator.registerFactory(
-    () => TopRatedTVNotifier(
-      getTopRatedTv: locator(),
+    () => DetailTVBloc(
+      getTVDetail: locator(),
     ),
   );
-
   locator.registerFactory(
-    () => WatchlistTVNotifier(
-      getWatchlistTv: locator(),
-    ),
+    () => TopRatedTVBloc(locator()),
   );
   // use case movie
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));

@@ -5,7 +5,7 @@ import 'package:core/utils/utils.dart';
 
 import 'package:movie/presentation/bloc/watchlist_movie_bloc.dart';
 import 'package:movie/presentation/widgets/watchlist_movie.dart';
-import 'package:tv_series/presentation/provider/watchlist_tv_notifier.dart';
+import 'package:tv_series/presentation/bloc/watchlist_tv_bloc.dart';
 
 import 'package:tv_series/presentation/widgets/watchlist_tv.dart';
 
@@ -27,8 +27,8 @@ class _WatchListPageState extends State<WatchListPage>
     Future.microtask(() {
       Provider.of<WatchlistMovieBloc>(context, listen: false)
           .add(FetchMovieWatchlist());
-      Provider.of<WatchlistTVNotifier>(context, listen: false)
-          .fetchWatchlistTV();
+      Provider.of<WatchlistTVBloc>(context, listen: false)
+          .add(FetchTVWatchlist());
     });
   }
 
@@ -42,7 +42,9 @@ class _WatchListPageState extends State<WatchListPage>
   void didPopNext() {
     Provider.of<WatchlistMovieBloc>(context, listen: false)
         .add(FetchMovieWatchlist());
-    Provider.of<WatchlistTVNotifier>(context, listen: false).fetchWatchlistTV();
+    Provider.of<WatchlistTVBloc>(context, listen: false).add(
+      FetchTVWatchlist(),
+    );
   }
 
   @override

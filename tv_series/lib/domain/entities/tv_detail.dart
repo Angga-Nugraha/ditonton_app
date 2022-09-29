@@ -26,7 +26,7 @@ class TvDetail extends Equatable {
   final List<int> episodeRunTime;
 
   final List<Genre> genres;
-  final int? id;
+  final int id;
 
   final String? name;
   final int numberOfEpisodes;

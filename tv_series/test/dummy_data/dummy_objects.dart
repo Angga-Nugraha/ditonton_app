@@ -7,21 +7,20 @@ import 'package:tv_series/domain/entities/tv.dart';
 import 'package:tv_series/domain/entities/tv_detail.dart';
 
 final tv = Tv(
-    backdropPath: "/pdfCr8W0wBCpdjbZXSxnKhZtosP.jpg",
-    genreIds: const [10765, 10759, 18],
-    id: 84773,
-    name: "The Lord of the Rings: The Rings of Power",
-    originCountry: const ["US"],
-    originalLanguage: "en",
-    originalName: "The Lord of the Rings: The Rings of Power",
-    overview:
-        "Beginning in a time of relative peace, we follow an ensemble cast of characters as they confront the re-emergence of evil to Middle-earth. From the darkest depths of the Misty Mountains, to the majestic forests of Lindon, to the breathtaking island kingdom of Númenor, to the furthest reaches of the map, these kingdoms and characters will carve out legacies that live on long after they are gone.",
-    popularity: 5975.998,
-    posterPath: "/suyNxglk17Cpk8rCM2kZgqKdftk.jpg",
-    voteAverage: 7.6,
-    voteCount: 593);
+    backdropPath: "backdropPath",
+    genreIds: const [1, 2, 3],
+    id: 1,
+    name: "name",
+    originCountry: const ["originalCountry"],
+    originalLanguage: "originalLanguage",
+    originalName: "originalName",
+    overview: "overview",
+    popularity: 1.0,
+    posterPath: "posterPath",
+    voteAverage: 1.0,
+    voteCount: 1);
 
-final testTVList = [tv];
+final testTVList = <Tv>[tv];
 
 final testWatchlistTV = Tv.watchList(
   id: 1,

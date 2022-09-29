@@ -1,7 +1,6 @@
-import 'package:core/core.dart';
-import 'package:core/presentation/tv/provider/watchlist_tv_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tv_series/presentation/bloc/watchlist_tv_bloc.dart';
 import 'package:tv_series/presentation/widgets/tv_card_list.dart';
 
 class WatchListTV extends StatelessWidget {
@@ -13,28 +12,28 @@ class WatchListTV extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Consumer<WatchlistTVNotifier>(
-        builder: (context, data, child) {
-          if (data.watchlistState == RequestState.Empty) {
+      child: BlocBuilder<WatchlistTVBloc, WatchlistTVState>(
+        builder: (context, state) {
+          if (state is WatchlistTVEmpty) {
             return const Center(
               child: Text('Watchlist is empty'),
             );
-          } else if (data.watchlistState == RequestState.Loading) {
+          } else if (state is WatchlistTVLoading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (data.watchlistState == RequestState.Loaded) {
+          } else if (state is WatchlistTVHasData) {
             return ListView.builder(
               itemBuilder: (context, index) {
-                final tv = data.watchlistTV[index];
+                final tv = state.result[index];
                 return TVCard(tv);
               },
-              itemCount: data.watchlistTV.length,
+              itemCount: state.result.length,
             );
           } else {
-            return Center(
-              key: const Key('error_message'),
-              child: Text(data.message),
+            return const Center(
+              key: Key('error_message'),
+              child: Text('Failed'),
             );
           }
         },

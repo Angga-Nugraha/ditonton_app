@@ -3,7 +3,7 @@ import 'package:tv_series/domain/entities/tv_detail.dart';
 import 'package:equatable/equatable.dart';
 
 class TvTable extends Equatable {
-  final int? id;
+  final int id;
   final String? name;
   final String? posterPath;
   final String? overview;
@@ -37,7 +37,7 @@ class TvTable extends Equatable {
       };
 
   Tv toEntity() => Tv.watchList(
-        id: id!,
+        id: id,
         name: name,
         posterPath: posterPath,
         overview: overview,

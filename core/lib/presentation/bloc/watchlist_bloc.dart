@@ -10,11 +10,13 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
   final GetWatchListStatus getWatchListStatus;
   final SaveWatchlist saveWatchlist;
   final RemoveWatchlist removeWatchlist;
+  final GetWatchListTVStatus getWatchListTVStatus;
   final SaveWatchlistTV saveWatchlistTV;
   final RemoveWatchlistTV removeWatchlistTV;
 
   WatchlistBloc({
     required this.getWatchListStatus,
+    required this.getWatchListTVStatus,
     required this.saveWatchlist,
     required this.removeWatchlist,
     required this.saveWatchlistTV,
@@ -24,6 +26,14 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
       final id = event.id;
 
       final result = await getWatchListStatus.execute(id);
+
+      emit(WatchlistHasData(result));
+    });
+
+    on<LoadWatchlistTVStatus>((event, emit) async {
+      final id = event.id;
+
+      final result = await getWatchListTVStatus.execute(id);
 
       emit(WatchlistHasData(result));
     });
@@ -63,7 +73,7 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
         (successMessage) => emit(const WatchlistSuccess('Added to Watchlist')),
       );
 
-      add(LoadWatchlistStatus(tv.id!));
+      add(LoadWatchlistTVStatus(tv.id));
     });
 
     on<DeleteTvWatchlist>((event, emit) async {
@@ -75,7 +85,7 @@ class WatchlistBloc extends Bloc<WatchlistEvent, WatchlistState> {
         (successMessage) =>
             emit(const WatchlistSuccess('Removed from Watchlist')),
       );
-      add(LoadWatchlistStatus(tv.id!));
+      add(LoadWatchlistTVStatus(tv.id));
     });
   }
 }

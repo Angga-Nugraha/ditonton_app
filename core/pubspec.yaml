@@ -22,6 +22,8 @@ dependencies:
   firebase_crashlytics: ^2.8.11
   flutter_bloc: ^8.0.0
   equatable: ^2.0.2
+  http: ^0.13.3
+  google_fonts: ^3.0.1
 
 dev_dependencies:
   flutter_test:
