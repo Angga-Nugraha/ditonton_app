@@ -77,6 +77,38 @@ void main() {
   }
 
   group('Detail Movie Page', () {
+    testWidgets('Should progres indicator bar when data loading',
+        (WidgetTester tester) async {
+      when(() => mockDetailMovieBloc.state).thenReturn(DetailMovieLoading());
+      when(() => recommendationMovieBloc.state)
+          .thenReturn(RecommendationMovieLoading());
+      when(() => mockWatchlistBloc.state)
+          .thenReturn(const WatchlistHasData(false));
+
+      final finderProgresBar = find.byType(CircularProgressIndicator);
+      final centerFinder = find.byType(Center);
+
+      await tester
+          .pumpWidget(_makeTestableWidget(const MovieDetailPage(id: 1)));
+
+      expect(finderProgresBar, findsOneWidget);
+      expect(centerFinder, findsOneWidget);
+    });
+    testWidgets('Should text message  when error', (WidgetTester tester) async {
+      when(() => mockDetailMovieBloc.state)
+          .thenReturn(const DetailMovieError('error_message'));
+      when(() => recommendationMovieBloc.state)
+          .thenReturn(const RecommendationMovieError('error_message'));
+      when(() => mockWatchlistBloc.state)
+          .thenReturn(const WatchlistHasData(false));
+
+      final textFinder = find.byKey(const Key('error_message'));
+
+      await tester
+          .pumpWidget(_makeTestableWidget(const MovieDetailPage(id: 1)));
+
+      expect(textFinder, findsOneWidget);
+    });
     testWidgets(
         'Watchlist button should display add icon when movie not added to watchlist',
         (WidgetTester tester) async {

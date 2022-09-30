@@ -35,8 +35,10 @@ void main() {
       },
       act: (bloc) => bloc.add(const FetchDetailTV(tId)),
       wait: const Duration(milliseconds: 500),
-      expect: () =>
-          [DetailTVLoading(), const DetailTVHasData(result: testTVDetail)],
+      expect: () => [
+        DetailTVLoading(),
+        const DetailTVHasData(result: testTVDetail),
+      ],
       verify: (bloc) {
         verify(mockGetTVDetail.execute(tId));
       },

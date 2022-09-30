@@ -135,36 +135,39 @@ class MovieList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 200,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          final movie = movies[index];
-          return Container(
-            padding: const EdgeInsets.all(8),
-            child: InkWell(
-              onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  MOVIE_DETAIL_ROUTE,
-                  arguments: movie.id,
-                );
-              },
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(16)),
-                child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(),
+    return Material(
+      child: SizedBox(
+        height: 200,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            final movie = movies[index];
+            return Container(
+              padding: const EdgeInsets.all(8),
+              child: InkWell(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    MOVIE_DETAIL_ROUTE,
+                    arguments: movie.id,
+                  );
+                },
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(16)),
+                  child: CachedNetworkImage(
+                    imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
-            ),
-          );
-        },
-        itemCount: movies.length,
+            );
+          },
+          itemCount: movies.length,
+        ),
       ),
     );
   }

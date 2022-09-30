@@ -50,7 +50,10 @@ class _TVDetailPageState extends State<TVDetailPage> {
               child: DetailContent(tv),
             );
           } else {
-            return const Text('Failed');
+            return const Text(
+              key: Key('error_message'),
+              'Failed',
+            );
           }
         },
       ),

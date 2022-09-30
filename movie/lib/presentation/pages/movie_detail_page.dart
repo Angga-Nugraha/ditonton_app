@@ -48,7 +48,10 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               child: DetailContent(movie),
             );
           } else {
-            return const Text('Failed');
+            return const Text(
+              key: Key('error_message'),
+              'Failed',
+            );
           }
         },
       ),

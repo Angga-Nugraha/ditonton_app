@@ -108,5 +108,19 @@ void main() {
 
       expect(watchlistButtonIcon, findsOneWidget);
     });
+    testWidgets('Should text message  when error', (WidgetTester tester) async {
+      when(() => mockDetailTVBloc.state)
+          .thenReturn(const DetailTVError('error_message'));
+      when(() => recommendationTVBloc.state)
+          .thenReturn(const RecommendationTVError('error_message'));
+      when(() => mockWatchlistBloc.state)
+          .thenReturn(const WatchlistHasData(false));
+
+      final textFinder = find.byKey(const Key('error_message'));
+
+      await tester.pumpWidget(_makeTestableWidget(const TVDetailPage(id: 1)));
+
+      expect(textFinder, findsOneWidget);
+    });
   });
 }
