@@ -1,4 +1,4 @@
-![Screenshot_1690632182](https://github.com/Angga-Nugraha/ditonton_app/assets/76716099/9deecb37-d13d-48e0-998a-2e5152034f54)# ditonton_app
+# ditonton_app
 ## Tentang Aplikasi
 Apliksi ini sebagai tugas akhir dari kelas Menjadi Development Flutter Expert pada program MSIB Batch 3  bersama [Dicoding Academy](https://www.dicoding.com/) x Kampus Merdeka.
 
