@@ -25,7 +25,7 @@ LH:2
 end_of_record
 SF:lib\watchlist\bloc\watchlist_bloc.dart
 DA:18,1
-DA:25,2
+DA:25,1
 DA:26,2
 DA:27,1
 DA:29,2
@@ -71,9 +71,9 @@ SF:lib\watchlist\bloc\watchlist_state.dart
 DA:4,3
 DA:6,0
 DA:7,0
-DA:13,1
-DA:15,1
-DA:16,2
+DA:13,2
+DA:15,0
+DA:16,0
 DA:23,0
 DA:25,0
 DA:26,0
@@ -84,7 +84,7 @@ DA:41,2
 DA:43,1
 DA:44,2
 LF:15
-LH:8
+LH:6
 end_of_record
 SF:lib\utils\utils.dart
 DA:3,0
