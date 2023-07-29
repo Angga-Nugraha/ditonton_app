@@ -18,8 +18,7 @@ class WatchListMovies extends StatelessWidget {
             return const Center(
               child: Text('Watchlist is empty'),
             );
-          }
-          if (state is WatchlistMovieLoading) {
+          } else if (state is WatchlistMovieLoading) {
             return const Center(
               child: CircularProgressIndicator(),
             );

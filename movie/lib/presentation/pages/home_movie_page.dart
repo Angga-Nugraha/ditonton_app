@@ -60,12 +60,11 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                }
-                if (state is PlayingNowMovieListHasData) {
+                } else if (state is PlayingNowMovieListHasData) {
                   return MovieList(state.result);
+                } else {
+                  return const Text('Failed');
                 }
-
-                return const Text('Failed');
               }),
               _buildSubHeading(
                   title: 'Top Rated',
@@ -142,24 +141,28 @@ class MovieList extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           final movie = movies[index];
-          return Container(
-            padding: const EdgeInsets.all(8),
-            child: InkWell(
-              onTap: () {
-                Navigator.pushNamed(
-                  context,
-                  movieDetailRoutes,
-                  arguments: movie.id,
-                );
-              },
-              child: ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(16)),
-                child: CachedNetworkImage(
-                  imageUrl: '$baseImageUrl${movie.posterPath}',
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(),
+          return Material(
+            color: kRichBlack,
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              child: InkWell(
+                onTap: () {
+                  Navigator.pushNamed(
+                    context,
+                    movieDetailRoutes,
+                    arguments: movie.id,
+                  );
+                },
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(16)),
+                  child: CachedNetworkImage(
+                    imageUrl: '$baseImageUrl${movie.posterPath}',
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
             ),
