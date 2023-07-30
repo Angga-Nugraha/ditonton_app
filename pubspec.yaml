@@ -16,35 +16,36 @@ dependencies:
   build_runner: ^2.2.1
   core:
     path: core
-  movie:
-    path: movie
-  search:
-    path: search
-  tv_series:
-    path: tv_series
-  flutter:
-    sdk: flutter
   cupertino_icons: ^1.0.2
   firebase_core: ^1.23.0
-  firebase_crashlytics: ^2.8.11
   firebase_core_platform_interface: 4.5.1
-  firebase_messaging: ^13.0.4 
+  firebase_crashlytics: ^2.8.11
+  firebase_messaging: ^13.0.4
+  flutter:
+    sdk: flutter
   flutter_bloc: ^8.1.1
   get_it: ^7.1.3
   http: ^1.1.0
-  test_cov_console: ^0.2.2
+  movie:
+    path: movie
   provider: ^6.0.3
+  search:
+    path: search
+  test_cov_console: ^0.2.2
+  tv_series:
+    path: tv_series
+  
 
 dev_dependencies:
+  bloc_test: ^9.0.0
+  change_app_package_name: ^1.1.0
+  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
   integration_test:
     sdk: flutter
   mockito: ^5.0.8
-  bloc_test: ^9.0.0
   mocktail: ^0.3.0
-  flutter_lints: ^2.0.0
-  change_app_package_name: ^1.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -7,7 +7,6 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'package:submission_akhir/firebase_options.dart';
 import 'package:submission_akhir/injection.dart' as di;
-import 'package:core/watchlist/bloc/watchlist_bloc.dart';
 
 import 'package:movie/movie.dart';
 import 'package:tv_series/tv_series.dart';
@@ -46,6 +45,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<RecommendationMovieBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TrailerMovieBloc>(),
         ),
         BlocProvider(
           create: (_) => di.locator<WatchlistMovieBloc>(),

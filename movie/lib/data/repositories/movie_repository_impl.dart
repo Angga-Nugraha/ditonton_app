@@ -150,4 +150,10 @@ class MovieRepositoryImpl implements MovieRepository {
     final result = await localDataSource.getWatchlistMovies();
     return Right(result.map((data) => data.toEntity()).toList());
   }
+
+  @override
+  Future<Either<Failure, Video>> getTrailerMovies(int movieId) async {
+    final result = await remoteDataSource.getVideoTrailerMovies(movieId);
+    return Right(result.toEntity());
+  }
 }

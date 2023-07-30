@@ -1,15 +1,10 @@
+import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:core/core.dart';
-import 'package:core/watchlist/bloc/watchlist_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie/domain/entities/genre.dart';
-import 'package:movie/domain/entities/movie_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:movie/presentation/bloc/detail_movie_bloc.dart';
-import 'package:movie/presentation/bloc/recommendation_movie_bloc.dart';
-import 'package:movie/presentation/widgets/recomendations_movie_list.dart';
-import 'package:provider/provider.dart';
+import 'package:core/core.dart';
+import 'package:movie/movie.dart';
 
 class MovieDetailPage extends StatefulWidget {
   final int id;
@@ -30,6 +25,8 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               .add(FetchRecommendationMovie(widget.id)),
           Provider.of<WatchlistBloc>(context, listen: false)
               .add(LoadWatchlistStatus(widget.id)),
+          Provider.of<TrailerMovieBloc>(context, listen: false)
+              .add(FetchTrailerMovie(movieid: widget.id)),
         ]);
   }
 
@@ -172,6 +169,24 @@ class DetailContent extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(height: 16),
+                            BlocBuilder<TrailerMovieBloc, TrailerMovieState>(
+                              builder: (context, state) {
+                                if (state is TrailerMovieLoading) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                } else if (state is TrailerMovieHasData) {
+                                  return ClipRRect(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    child: VideoScreen(
+                                        initialkey:
+                                            state.result.results[4].key),
+                                  );
+                                }
+                                return Container();
+                              },
+                            ),
+                            const SizedBox(height: 16),
                             Text(
                               'Overview',
                               style: kHeading6,
@@ -219,9 +234,7 @@ class DetailContent extends StatelessWidget {
                 ),
               );
             },
-            // initialChildSize: 0.5,
             minChildSize: 0.25,
-            // maxChildSize: 1.0,
           ),
         ),
         Padding(

@@ -198,4 +198,33 @@ void main() {
       expect(() => call, throwsA(isA<ServerException>()));
     });
   });
+
+  group('get movie trailer', () {
+    final videoTrailer = VideoModel.fromJson(
+        json.decode(readJson('dummy_data/vidio_dummy.json')));
+    const tId = 1;
+
+    test('should return list of video Model when the response code is 200',
+        () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$baseUrl/movie/$tId/videos?$apiKey')))
+          .thenAnswer((_) async =>
+              http.Response(readJson('dummy_data/vidio_dummy.json'), 200));
+      // act
+      final result = await dataSource.getVideoTrailerMovies(tId);
+      // assert
+      expect(result, equals(videoTrailer));
+    });
+
+    test('should throw Server Exception when the response code is 404 or other',
+        () async {
+      // arrange
+      when(mockHttpClient.get(Uri.parse('$baseUrl/movie/$tId/videos?$apiKey')))
+          .thenAnswer((_) async => http.Response('Not Found', 404));
+      // act
+      final call = dataSource.getVideoTrailerMovies(tId);
+      // assert
+      expect(() => call, throwsA(isA<ServerException>()));
+    });
+  });
 }

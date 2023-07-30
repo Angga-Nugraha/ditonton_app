@@ -1,6 +1,5 @@
 import 'package:get_it/get_it.dart';
 
-import 'package:core/watchlist/bloc/watchlist_bloc.dart';
 import 'package:core/data/ssl_pinning.dart';
 
 import 'package:core/core.dart';
@@ -30,6 +29,11 @@ void init() {
   locator.registerFactory(
     () => DetailMovieBloc(
       getMovieDetail: locator(),
+    ),
+  );
+  locator.registerFactory(
+    () => TrailerMovieBloc(
+      getTrailerMovie: locator(),
     ),
   );
   locator.registerFactory(
@@ -106,6 +110,8 @@ void init() {
   locator.registerLazySingleton(() => SaveWatchlist(locator()));
   locator.registerLazySingleton(() => RemoveWatchlist(locator()));
   locator.registerLazySingleton(() => GetWatchlistMovies(locator()));
+  locator
+      .registerLazySingleton(() => GetTrailerMovie(movieRepository: locator()));
   // use case tv
   locator.registerLazySingleton(() => GetNowPlayingTv(locator()));
   locator.registerLazySingleton(() => GetPopularTv(locator()));

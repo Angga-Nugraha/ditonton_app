@@ -28,6 +28,7 @@ export 'package:movie/domain/usecases/get_watchlist_movies.dart';
 export 'package:movie/domain/usecases/get_watchlist_status.dart';
 export 'package:movie/domain/usecases/remove_watchlist.dart';
 export 'package:movie/domain/usecases/save_watchlist.dart';
+export 'package:movie/domain/usecases/get_video_trailer_movie.dart';
 
 // presentation
 export 'package:movie/presentation/pages/home_movie_page.dart';
@@ -44,3 +45,4 @@ export 'package:movie/presentation/bloc/popular_movie_bloc.dart';
 export 'package:movie/presentation/bloc/recommendation_movie_bloc.dart';
 export 'package:movie/presentation/bloc/top_rated_movie_bloc.dart';
 export 'package:movie/presentation/bloc/watchlist_movie_bloc.dart';
+export 'package:movie/presentation/bloc/trailer_movie_bloc.dart';

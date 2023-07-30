@@ -1,6 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
-import 'package:core/watchlist/bloc/watchlist_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv_series/domain/entities/genre.dart';
 import 'package:tv_series/domain/entities/tv_detail.dart';
