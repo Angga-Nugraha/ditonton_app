@@ -71,7 +71,7 @@ class DetailContent extends StatelessWidget {
     return Stack(
       children: [
         CachedNetworkImage(
-          imageUrl: 'https://image.tmdb.org/t/p/w500$poster',
+          imageUrl: '$baseImageUrl$poster',
           width: screenWidth,
           placeholder: (context, url) => const Center(
             child: CircularProgressIndicator(),
@@ -79,7 +79,7 @@ class DetailContent extends StatelessWidget {
           errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
         Container(
-          margin: const EdgeInsets.only(top: 48 + 8),
+          margin: const EdgeInsets.only(top: 50),
           child: DraggableScrollableSheet(
             builder: (context, scrollController) {
               return Container(

@@ -67,7 +67,7 @@ class DetailSeason extends StatelessWidget {
     return Stack(
       children: [
         CachedNetworkImage(
-          imageUrl: 'https://image.tmdb.org/t/p/w500${season.posterPath}',
+          imageUrl: '$baseImageUrl${season.posterPath}',
           width: screenWidth,
           placeholder: (context, url) => const Center(
             child: CircularProgressIndicator(),
@@ -167,14 +167,23 @@ class DetailSeason extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 8),
                     child: ClipRRect(
                       borderRadius: const BorderRadius.all(Radius.circular(8)),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            'https://image.tmdb.org/t/p/w500${season.episodes[index].stillPath}',
-                        placeholder: (context, url) => const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          CachedNetworkImage(
+                            imageUrl:
+                                '$baseImageUrl${season.episodes[index].stillPath}',
+                            placeholder: (context, url) => const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                          ),
+                          const Icon(
+                            Icons.play_circle_outline,
+                            size: 40,
+                          ),
+                        ],
                       ),
                     ),
                   ),

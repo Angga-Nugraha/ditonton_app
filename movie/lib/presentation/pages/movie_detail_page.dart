@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,8 +26,6 @@ class _MovieDetailPageState extends State<MovieDetailPage> {
               .add(FetchRecommendationMovie(widget.id)),
           Provider.of<WatchlistBloc>(context, listen: false)
               .add(LoadWatchlistStatus(widget.id)),
-          Provider.of<TrailerMovieBloc>(context, listen: false)
-              .add(FetchTrailerMovie(movieid: widget.id)),
         ]);
   }
 
@@ -67,7 +66,7 @@ class DetailContent extends StatelessWidget {
     return Stack(
       children: [
         CachedNetworkImage(
-          imageUrl: 'https://image.tmdb.org/t/p/w500${movie.posterPath}',
+          imageUrl: '$baseImageUrl${movie.posterPath}',
           width: screenWidth,
           placeholder: (context, url) => const Center(
             child: CircularProgressIndicator(),
@@ -75,7 +74,7 @@ class DetailContent extends StatelessWidget {
           errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
         Container(
-          margin: const EdgeInsets.only(top: 48 + 8),
+          margin: const EdgeInsets.only(top: 50),
           child: DraggableScrollableSheet(
             builder: (context, scrollController) {
               return Container(
@@ -101,58 +100,11 @@ class DetailContent extends StatelessWidget {
                               movie.title,
                               style: kHeading5,
                             ),
-                            BlocConsumer<WatchlistBloc, WatchlistState>(
-                              listener: (context, state) {
-                                if (state is WatchlistSuccess) {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
-                                    content: Text(state.message),
-                                  ));
-                                } else if (state is WatchlistFailure) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        content: Text(state.message),
-                                      );
-                                    },
-                                  );
-                                }
-                              },
-                              builder: (context, state) {
-                                return ElevatedButton(
-                                  onPressed: () async {
-                                    if (state is WatchlistHasData) {
-                                      if (state.isAdded == false) {
-                                        context
-                                            .read<WatchlistBloc>()
-                                            .add(AddMovieWatchlist(movie));
-                                      } else if (state.isAdded == true) {
-                                        context
-                                            .read<WatchlistBloc>()
-                                            .add(DeleteMovieWatchlist(movie));
-                                      }
-                                    }
-                                  },
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      if (state is WatchlistHasData)
-                                        if (state.isAdded == false)
-                                          const Icon(Icons.add)
-                                        else if (state.isAdded == true)
-                                          const Icon(Icons.check),
-                                      const Text('Watchlist'),
-                                    ],
-                                  ),
-                                );
-                              },
-                            ),
                             Text(
                               _showGenres(movie.genres),
                             ),
                             Text(
-                              _showDuration(movie.runtime),
+                              "Duration : ${_showDuration(movie.runtime)}",
                             ),
                             Row(
                               children: [
@@ -168,23 +120,120 @@ class DetailContent extends StatelessWidget {
                                 Text('${movie.voteAverage}')
                               ],
                             ),
-                            const SizedBox(height: 16),
-                            BlocBuilder<TrailerMovieBloc, TrailerMovieState>(
-                              builder: (context, state) {
-                                if (state is TrailerMovieLoading) {
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                } else if (state is TrailerMovieHasData) {
-                                  return ClipRRect(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    child: VideoScreen(
-                                        initialkey:
-                                            state.result.results[4].key),
-                                  );
-                                }
-                                return Container();
-                              },
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                BlocConsumer<WatchlistBloc, WatchlistState>(
+                                  listener: (context, state) {
+                                    if (state is WatchlistSuccess) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
+                                        content: Text(state.message),
+                                      ));
+                                    } else if (state is WatchlistFailure) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return AlertDialog(
+                                            content: Text(state.message),
+                                          );
+                                        },
+                                      );
+                                    }
+                                  },
+                                  builder: (context, state) {
+                                    return ElevatedButton(
+                                      onPressed: () async {
+                                        if (state is WatchlistHasData) {
+                                          if (state.isAdded == false) {
+                                            context
+                                                .read<WatchlistBloc>()
+                                                .add(AddMovieWatchlist(movie));
+                                          } else if (state.isAdded == true) {
+                                            context.read<WatchlistBloc>().add(
+                                                DeleteMovieWatchlist(movie));
+                                          }
+                                        }
+                                      },
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          if (state is WatchlistHasData)
+                                            if (state.isAdded == false)
+                                              const Icon(Icons.add)
+                                            else if (state.isAdded == true)
+                                              const Icon(Icons.check),
+                                          const Text('Watchlist'),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                                BlocConsumer<TrailerMovieBloc,
+                                    TrailerMovieState>(
+                                  listener: (context, state) {
+                                    if (state is TrailerMovieHasData) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return Dialog(
+                                            insetPadding: EdgeInsets.zero,
+                                            backgroundColor:
+                                                Colors.white.withOpacity(0.5),
+                                            child: Stack(
+                                              alignment: Alignment.topRight,
+                                              children: [
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          4.0),
+                                                  child: state.result.results
+                                                          .isNotEmpty
+                                                      ? VideoScreen(
+                                                          video: state.result)
+                                                      : const SizedBox(
+                                                          height: 100,
+                                                          child: Center(
+                                                            child: Text(
+                                                                "Vidio not found"),
+                                                          ),
+                                                        ),
+                                                ),
+                                                IconButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                      SystemChrome
+                                                          .setPreferredOrientations(
+                                                              DeviceOrientation
+                                                                  .values);
+                                                    },
+                                                    icon:
+                                                        const Icon(Icons.close))
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    }
+                                  },
+                                  builder: (context, state) {
+                                    return ElevatedButton(
+                                      onPressed: () async {
+                                        context.read<TrailerMovieBloc>().add(
+                                            FetchTrailerMovie(
+                                                movieid: movie.id));
+                                      },
+                                      child: const Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(Icons.movie_filter_outlined),
+                                          Text('View trailer'),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
                             ),
                             const SizedBox(height: 16),
                             Text(

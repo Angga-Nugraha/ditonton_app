@@ -1,10 +1,12 @@
+import 'dart:math';
+
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideoScreen extends StatefulWidget {
-  final String initialkey;
-  const VideoScreen({required this.initialkey, super.key});
+  final Video video;
+  const VideoScreen({required this.video, super.key});
 
   @override
   State<VideoScreen> createState() => _VideoScreenState();
@@ -12,12 +14,14 @@ class VideoScreen extends StatefulWidget {
 
 class _VideoScreenState extends State<VideoScreen> {
   late YoutubePlayerController _controller;
+  final rand = Random();
 
   @override
   void initState() {
     super.initState();
     _controller = YoutubePlayerController(
-      initialVideoId: widget.initialkey,
+      initialVideoId:
+          widget.video.results[rand.nextInt(widget.video.results.length)].key,
       flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
@@ -33,19 +37,16 @@ class _VideoScreenState extends State<VideoScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return YoutubePlayerBuilder(
-      onExitFullScreen: () {
-        SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-      },
-      player: YoutubePlayer(
-        controller: _controller,
-        showVideoProgressIndicator: true,
-        width: MediaQuery.of(context).size.width,
-        actionsPadding: const EdgeInsets.all(10.0),
-      ),
-      builder: (ccontext, player) {
-        return player;
-      },
-    );
+    return widget.video.results.isEmpty
+        ? Container()
+        : YoutubePlayerBuilder(
+            player: YoutubePlayer(
+              controller: _controller,
+              showVideoProgressIndicator: true,
+            ),
+            builder: (ccontext, player) {
+              return player;
+            },
+          );
   }
 }
