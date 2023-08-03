@@ -167,4 +167,38 @@ class TvRepositoryImpl implements TvRepository {
       return Left(CommonFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, Video>> getTrailerTv(int tvId) async {
+    try {
+      final result = await remoteDataSource.getTrailerTv(tvId);
+      return Right(result.toEntity());
+    } on ServerException {
+      return const Left(ServerFailure(''));
+    } on SocketException {
+      return const Left(ConnectionFailure('Failed to connect to the network'));
+    } on TlsException catch (e) {
+      return Left(CommonFailure('Certificated not valid\n${e.message}'));
+    } catch (e) {
+      return Left(CommonFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Video>> getTrailerEpisode(
+      int tvId, int numbSeason, int numbEpisode) async {
+    try {
+      final result = await remoteDataSource.getTrailerEpisode(
+          tvId, numbSeason, numbEpisode);
+      return Right(result.toEntity());
+    } on ServerException {
+      return const Left(ServerFailure(''));
+    } on SocketException {
+      return const Left(ConnectionFailure("Failed to connect network"));
+    } on TlsException catch (e) {
+      return Left(CommonFailure("Certificated not valid\n${e.message}"));
+    } catch (e) {
+      return Left(CommonFailure(e.toString()));
+    }
+  }
 }

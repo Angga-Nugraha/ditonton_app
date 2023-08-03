@@ -1,16 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tv_series/domain/entities/genre.dart';
-import 'package:tv_series/domain/entities/tv_detail.dart';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
-import 'package:tv_series/presentation/bloc/recommendations_tv_bloc.dart';
-import 'package:tv_series/presentation/bloc/tv_detail_bloc.dart';
-import 'package:tv_series/presentation/widgets/recomendations_tv_list.dart';
-import 'package:tv_series/presentation/widgets/season_list.dart';
+import 'package:tv_series/tv_series.dart';
 
 class TVDetailPage extends StatefulWidget {
   final int id;
@@ -70,14 +63,7 @@ class DetailContent extends StatelessWidget {
     final poster = tvDetail.posterPath;
     return Stack(
       children: [
-        CachedNetworkImage(
-          imageUrl: '$baseImageUrl$poster',
-          width: screenWidth,
-          placeholder: (context, url) => const Center(
-            child: CircularProgressIndicator(),
-          ),
-          errorWidget: (context, url, error) => const Icon(Icons.error),
-        ),
+        buildCardImage(poster!, screenWidth: screenWidth),
         Container(
           margin: const EdgeInsets.only(top: 50),
           child: DraggableScrollableSheet(
@@ -105,69 +91,74 @@ class DetailContent extends StatelessWidget {
                               tvDetail.name!,
                               style: kHeading5,
                             ),
-                            BlocConsumer<WatchlistBloc, WatchlistState>(
-                              listener: (context, state) {
-                                if (state is WatchlistSuccess) {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
-                                    content: Text(state.message),
-                                  ));
-                                } else if (state is WatchlistFailure) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
+                            showGenres(tvDetail.genres),
+                            const SizedBox(height: 16),
+                            buildRattingBar(tvDetail.voteAverage),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                BlocConsumer<WatchlistBloc, WatchlistState>(
+                                  listener: (context, state) {
+                                    if (state is WatchlistSuccess) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(
                                         content: Text(state.message),
-                                      );
-                                    },
-                                  );
-                                }
-                              },
-                              builder: (context, state) {
-                                return ElevatedButton(
-                                  onPressed: () async {
-                                    if (state is WatchlistHasData) {
-                                      if (state.isAdded == false) {
-                                        context
-                                            .read<WatchlistBloc>()
-                                            .add(AddTvWatchlist(tvDetail));
-                                      } else if (state.isAdded == true) {
-                                        context
-                                            .read<WatchlistBloc>()
-                                            .add(DeleteTvWatchlist(tvDetail));
-                                      }
+                                      ));
+                                    } else if (state is WatchlistFailure) {
+                                      buildDialog(context, state.message);
                                     }
                                   },
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      if (state is WatchlistHasData)
-                                        if (state.isAdded == false)
-                                          const Icon(Icons.add)
-                                        else if (state.isAdded == true)
-                                          const Icon(Icons.check),
-                                      const Text('Watchlist'),
-                                    ],
-                                  ),
-                                );
-                              },
-                            ),
-                            Text(
-                              _showGenres(tvDetail.genres),
-                            ),
-                            const SizedBox(height: 16),
-                            Row(
-                              children: [
-                                RatingBarIndicator(
-                                  rating: tvDetail.voteAverage / 2,
-                                  itemCount: 5,
-                                  itemBuilder: (context, index) => const Icon(
-                                    Icons.star,
-                                    color: kMikadoYellow,
-                                  ),
-                                  itemSize: 24,
+                                  builder: (context, state) {
+                                    return ElevatedButton(
+                                      onPressed: () async {
+                                        if (state is WatchlistHasData) {
+                                          if (state.isAdded == false) {
+                                            context
+                                                .read<WatchlistBloc>()
+                                                .add(AddTvWatchlist(tvDetail));
+                                          } else if (state.isAdded == true) {
+                                            context.read<WatchlistBloc>().add(
+                                                DeleteTvWatchlist(tvDetail));
+                                          }
+                                        }
+                                      },
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          if (state is WatchlistHasData)
+                                            if (state.isAdded == false)
+                                              const Icon(Icons.add)
+                                            else if (state.isAdded == true)
+                                              const Icon(Icons.check),
+                                          const Text('Watchlist'),
+                                        ],
+                                      ),
+                                    );
+                                  },
                                 ),
-                                Text('${tvDetail.voteAverage}')
+                                BlocConsumer<TrailerTvBloc, TrailerTvState>(
+                                  listener: (context, state) {
+                                    if (state is TrailerTvHasData) {
+                                      final video = state.result;
+                                      buildVideoDialog(context, video);
+                                    }
+                                  },
+                                  builder: (context, state) {
+                                    return ElevatedButton(
+                                      onPressed: () {
+                                        context.read<TrailerTvBloc>().add(
+                                            FetchTrailerTv(tvId: tvDetail.id));
+                                      },
+                                      child: const Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(Icons.movie_filter_outlined),
+                                          Text('View Trailer'),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                ),
                               ],
                             ),
                             const SizedBox(height: 16),
@@ -245,18 +236,5 @@ class DetailContent extends StatelessWidget {
         )
       ],
     );
-  }
-
-  String _showGenres(List<Genre> genres) {
-    String result = '';
-    for (var genre in genres) {
-      result += '${genre.name}, ';
-    }
-
-    if (result.isEmpty) {
-      return result;
-    }
-
-    return result.substring(0, result.length - 2);
   }
 }

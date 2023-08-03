@@ -91,13 +91,20 @@ void init() {
       getTVSeason: locator(),
     ),
   );
-  locator.registerLazySingleton(
+  locator.registerFactory(
     () => DetailTVBloc(
       getTVDetail: locator(),
     ),
   );
   locator.registerFactory(
     () => TopRatedTVBloc(locator()),
+  );
+
+  locator.registerFactory(
+    () => TrailerTvBloc(getTrailerTv: locator()),
+  );
+  locator.registerFactory(
+    () => TrailerEpisodeBloc(getTrailerEpisode: locator()),
   );
   // use case movie
   locator.registerLazySingleton(() => GetNowPlayingMovies(locator()));
@@ -124,6 +131,8 @@ void init() {
   locator.registerLazySingleton(() => RemoveWatchlistTV(locator()));
   locator.registerLazySingleton(() => GetWatchlistTv(locator()));
   locator.registerLazySingleton(() => GetSeasonTV(locator()));
+  locator.registerLazySingleton(() => GetTrailerTv(locator()));
+  locator.registerLazySingleton(() => GetTrailerEpisode(locator()));
 
   // repository
   locator.registerLazySingleton<MovieRepository>(

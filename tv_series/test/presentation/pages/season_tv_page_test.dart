@@ -16,6 +16,7 @@ class SeasonTVEventFake extends Fake implements SeasonTVEvent {}
 class SeasonTVStateFake extends Fake implements SeasonTVState {}
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   late MockSeasonTVBloc mockSeasonTVBloc;
 
   setUpAll(() {

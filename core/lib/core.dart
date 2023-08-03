@@ -13,3 +13,4 @@ export 'data/models/video_model.dart';
 export 'entities/video.dart';
 export 'presentation/bloc/watchlist_bloc.dart';
 export 'presentation/widgets/video_screen.dart';
+export 'presentation/components/components_helper.dart';

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tv_series/domain/entities/tv.dart';
@@ -68,7 +67,7 @@ class _HomeTVPageState extends State<HomeTVPage> {
                   return const Text('Failed');
                 }
               }),
-              _buildSubHeading(
+              buildSubHeading(
                 title: 'Popular',
                 onTap: () => Navigator.pushNamed(context, popularTvRoutes),
               ),
@@ -84,7 +83,7 @@ class _HomeTVPageState extends State<HomeTVPage> {
                   return const Text('Failed');
                 }
               }),
-              _buildSubHeading(
+              buildSubHeading(
                 title: 'Top Rated',
                 onTap: () => Navigator.pushNamed(context, topRatedTvRoutes),
               ),
@@ -104,27 +103,6 @@ class _HomeTVPageState extends State<HomeTVPage> {
           ),
         ),
       ),
-    );
-  }
-
-  Row _buildSubHeading({required String title, required Function() onTap}) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: kHeading6,
-        ),
-        InkWell(
-          onTap: onTap,
-          child: const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Row(
-              children: [Text('See More'), Icon(Icons.arrow_forward_ios)],
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
@@ -156,14 +134,7 @@ class TVList extends StatelessWidget {
                 },
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  child: CachedNetworkImage(
-                    imageUrl: '$baseImageUrl${tvList.posterPath}',
-                    placeholder: (context, url) => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
-                  ),
+                  child: buildCardImage(tvList.posterPath!),
                 ),
               ),
             ),

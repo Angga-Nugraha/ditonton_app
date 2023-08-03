@@ -1,6 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:core/core.dart';
 import 'package:tv_series/domain/entities/tv_detail.dart';
-import 'package:core/utils/routes.dart';
 import 'package:flutter/material.dart';
 
 class SeasonList extends StatelessWidget {
@@ -38,15 +37,7 @@ class SeasonList extends StatelessWidget {
                     },
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: CachedNetworkImage(
-                        imageUrl: 'https://image.tmdb.org/t/p/w500$poster',
-                        placeholder: (context, url) => const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
-                        fit: BoxFit.cover,
-                      ),
+                      child: buildCardImage(poster!),
                     ),
                   ),
                 ),

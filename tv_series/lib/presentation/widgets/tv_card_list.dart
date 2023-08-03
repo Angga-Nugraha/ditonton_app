@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:tv_series/domain/entities/tv.dart';
 import 'package:flutter/material.dart';
@@ -58,15 +57,7 @@ class TVCard extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(8)),
-                  child: CachedNetworkImage(
-                    imageUrl: '$baseImageUrl${tv.posterPath}',
-                    width: 80,
-                    placeholder: (context, url) => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
-                  ),
+                  child: buildCardImage(tv.posterPath!, screenWidth: 80),
                 ),
               ),
             ],

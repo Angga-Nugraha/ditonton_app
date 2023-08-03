@@ -15,12 +15,13 @@ dependencies:
     path: ../movie
   tv_series:
     path: ../tv_series
-    
+  cached_network_image: ^3.0.0
   dartz: ^0.10.0-nullsafety.2
   encrypt: ^5.0.1
   sqflite_sqlcipher: ^2.1.1+1
   firebase_crashlytics: ^2.8.11
   flutter_bloc: ^8.0.0
+  flutter_rating_bar: ^4.0.0
   equatable: ^2.0.2
   http: ^1.1.0
   google_fonts: ^5.1.0
@@ -41,6 +42,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+use-material-design: true
 
   # To add assets to your package, add an assets section, like this:
   # assets:

@@ -36,6 +36,7 @@ class RecommendationTVEventFake extends Fake implements RecommendationTVEvent {}
 class RecommendationTVStateFake extends Fake implements RecommendationTVState {}
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   late MockDetailTVBloc mockDetailTVBloc;
   late MockWatchlistBloc mockWatchlistBloc;
   late MockRecommendationTVBloc recommendationTVBloc;

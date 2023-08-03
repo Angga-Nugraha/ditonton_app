@@ -50,6 +50,12 @@ class MyApp extends StatelessWidget {
           create: (_) => di.locator<TrailerMovieBloc>(),
         ),
         BlocProvider(
+          create: (_) => di.locator<TrailerTvBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TrailerEpisodeBloc>(),
+        ),
+        BlocProvider(
           create: (_) => di.locator<WatchlistMovieBloc>(),
         ),
         BlocProvider(

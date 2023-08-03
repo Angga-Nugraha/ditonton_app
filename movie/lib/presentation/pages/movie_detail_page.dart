@@ -1,9 +1,7 @@
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:core/core.dart';
 import 'package:movie/movie.dart';
 
@@ -65,14 +63,7 @@ class DetailContent extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     return Stack(
       children: [
-        CachedNetworkImage(
-          imageUrl: '$baseImageUrl${movie.posterPath}',
-          width: screenWidth,
-          placeholder: (context, url) => const Center(
-            child: CircularProgressIndicator(),
-          ),
-          errorWidget: (context, url, error) => const Icon(Icons.error),
-        ),
+        buildCardImage(movie.posterPath, screenWidth: screenWidth),
         Container(
           margin: const EdgeInsets.only(top: 50),
           child: DraggableScrollableSheet(
@@ -100,26 +91,9 @@ class DetailContent extends StatelessWidget {
                               movie.title,
                               style: kHeading5,
                             ),
-                            Text(
-                              _showGenres(movie.genres),
-                            ),
-                            Text(
-                              "Duration : ${_showDuration(movie.runtime)}",
-                            ),
-                            Row(
-                              children: [
-                                RatingBarIndicator(
-                                  rating: movie.voteAverage / 2,
-                                  itemCount: 5,
-                                  itemBuilder: (context, index) => const Icon(
-                                    Icons.star,
-                                    color: kMikadoYellow,
-                                  ),
-                                  itemSize: 24,
-                                ),
-                                Text('${movie.voteAverage}')
-                              ],
-                            ),
+                            showGenres(movie.genres),
+                            showDuration(movie.runtime),
+                            buildRattingBar(movie.voteAverage),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
@@ -131,14 +105,7 @@ class DetailContent extends StatelessWidget {
                                         content: Text(state.message),
                                       ));
                                     } else if (state is WatchlistFailure) {
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            content: Text(state.message),
-                                          );
-                                        },
-                                      );
+                                      buildDialog(context, state.message);
                                     }
                                   },
                                   builder: (context, state) {
@@ -173,47 +140,8 @@ class DetailContent extends StatelessWidget {
                                     TrailerMovieState>(
                                   listener: (context, state) {
                                     if (state is TrailerMovieHasData) {
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return Dialog(
-                                            insetPadding: EdgeInsets.zero,
-                                            backgroundColor:
-                                                Colors.white.withOpacity(0.5),
-                                            child: Stack(
-                                              alignment: Alignment.topRight,
-                                              children: [
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          4.0),
-                                                  child: state.result.results
-                                                          .isNotEmpty
-                                                      ? VideoScreen(
-                                                          video: state.result)
-                                                      : const SizedBox(
-                                                          height: 100,
-                                                          child: Center(
-                                                            child: Text(
-                                                                "Vidio not found"),
-                                                          ),
-                                                        ),
-                                                ),
-                                                IconButton(
-                                                    onPressed: () {
-                                                      Navigator.pop(context);
-                                                      SystemChrome
-                                                          .setPreferredOrientations(
-                                                              DeviceOrientation
-                                                                  .values);
-                                                    },
-                                                    icon:
-                                                        const Icon(Icons.close))
-                                              ],
-                                            ),
-                                          );
-                                        },
-                                      );
+                                      final video = state.result;
+                                      buildVideoDialog(context, video);
                                     }
                                   },
                                   builder: (context, state) {
@@ -301,29 +229,5 @@ class DetailContent extends StatelessWidget {
         )
       ],
     );
-  }
-
-  String _showGenres(List<Genre> genres) {
-    String result = '';
-    for (var genre in genres) {
-      result += '${genre.name}, ';
-    }
-
-    if (result.isEmpty) {
-      return result;
-    }
-
-    return result.substring(0, result.length - 2);
-  }
-
-  String _showDuration(int runtime) {
-    final int hours = runtime ~/ 60;
-    final int minutes = runtime % 60;
-
-    if (hours > 0) {
-      return '${hours}h ${minutes}m';
-    } else {
-      return '${minutes}m';
-    }
   }
 }

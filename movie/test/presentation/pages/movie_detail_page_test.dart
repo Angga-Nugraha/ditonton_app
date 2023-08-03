@@ -38,6 +38,7 @@ class RecommendationMovieStateFake extends Fake
     implements RecommendationMovieState {}
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   late MockDetailMovieBloc mockDetailMovieBloc;
   late MockWatchlistBloc mockWatchlistBloc;
   late MockRecommendationMovieBloc recommendationMovieBloc;

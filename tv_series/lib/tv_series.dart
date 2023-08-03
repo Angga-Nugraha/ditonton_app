@@ -33,6 +33,8 @@ export 'package:tv_series/domain/usecases/get_watchlist_status.dart';
 export 'package:tv_series/domain/usecases/get_watchlist_tv.dart';
 export 'package:tv_series/domain/usecases/remove_watchlist.dart';
 export 'package:tv_series/domain/usecases/save_watchlist.dart';
+export 'package:tv_series/domain/usecases/get_trailer_tv.dart';
+export 'package:tv_series/domain/usecases/get_trailer_episode.dart';
 
 // presentation
 export 'package:tv_series/presentation/pages/detail_tv_page.dart';
@@ -52,3 +54,5 @@ export 'package:tv_series/presentation/bloc/top_rated_tv_bloc.dart';
 export 'package:tv_series/presentation/bloc/tv_detail_bloc.dart';
 export 'package:tv_series/presentation/bloc/recommendations_tv_bloc.dart';
 export 'package:tv_series/presentation/bloc/watchlist_tv_bloc.dart';
+export 'package:tv_series/presentation/bloc/trailer_tv_bloc.dart';
+export 'package:tv_series/presentation/bloc/trailer_episode_bloc.dart';

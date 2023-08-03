@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/domain/entities/movie.dart';
@@ -66,7 +65,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   return const Text('Failed');
                 }
               }),
-              _buildSubHeading(
+              buildSubHeading(
                   title: 'Top Rated',
                   onTap: () {
                     Navigator.pushNamed(context, topRatedMovieRoutes);
@@ -83,7 +82,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                   return const Text('Failed');
                 }
               }),
-              _buildSubHeading(
+              buildSubHeading(
                 title: 'Popular',
                 onTap: () => Navigator.pushNamed(context, popularMovieRoutes),
               ),
@@ -103,27 +102,6 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           ),
         ),
       ),
-    );
-  }
-
-  Row _buildSubHeading({required String title, required Function() onTap}) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: kHeading6,
-        ),
-        InkWell(
-          onTap: onTap,
-          child: const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Row(
-              children: [Text('See More'), Icon(Icons.arrow_forward_ios)],
-            ),
-          ),
-        ),
-      ],
     );
   }
 }
@@ -155,14 +133,7 @@ class MovieList extends StatelessWidget {
                 },
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  child: CachedNetworkImage(
-                    imageUrl: '$baseImageUrl${movie.posterPath}',
-                    placeholder: (context, url) => const Center(
-                      child: CircularProgressIndicator(),
-                    ),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
-                  ),
+                  child: buildCardImage(movie.posterPath!),
                 ),
               ),
             ),

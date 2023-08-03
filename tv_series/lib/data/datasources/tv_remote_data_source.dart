@@ -15,6 +15,9 @@ abstract class TVRemoteDataSource {
   Future<List<TvModel>> getTvRecommendations(int id);
   Future<List<TvModel>> searchTv(String query);
   Future<SeasonDetailModel> getSeasonTv(int id, int numSeason);
+  Future<VideoModel> getTrailerTv(int tvId);
+  Future<VideoModel> getTrailerEpisode(
+      int tvId, int numbSeason, int numbEpisode);
 }
 
 class TVRemoteDataSourceImpl implements TVRemoteDataSource {
@@ -97,6 +100,30 @@ class TVRemoteDataSourceImpl implements TVRemoteDataSource {
         .get(Uri.parse('$baseUrl/tv/$id/season/$numSeason?$apiKey'));
     if (response.statusCode == 200) {
       return SeasonDetailModel.fromJson(json.decode(response.body));
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<VideoModel> getTrailerTv(int tvId) async {
+    final response =
+        await client.get(Uri.parse("$baseUrl/tv/$tvId/videos?$apiKey"));
+
+    if (response.statusCode == 200) {
+      return VideoModel.fromJson(json.decode(response.body));
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<VideoModel> getTrailerEpisode(
+      int tvId, int numbSeason, int numbEpisode) async {
+    final response = await client.get(Uri.parse(
+        "$baseUrl/tv/$tvId/season/$numbSeason/episode/$numbEpisode/videos?$apiKey"));
+    if (response.statusCode == 200) {
+      return VideoModel.fromJson(json.decode(response.body));
     } else {
       throw ServerException();
     }

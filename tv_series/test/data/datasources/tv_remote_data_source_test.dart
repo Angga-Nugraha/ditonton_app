@@ -183,4 +183,55 @@ void main() {
       expect(() => call, throwsA(isA<ServerException>()));
     });
   });
+
+  group("get trailer tv", () {
+    const id = 1;
+    final trailerTv = VideoModel.fromJson(
+        json.decode(readJson("dummy_data/vidio_dummy.json")));
+
+    test("get video trailer for tv series when response successful", () async {
+      when(mockHttpClient.get(Uri.parse("$baseUrl/tv/$id/videos?$apiKey")))
+          .thenAnswer((_) async =>
+              http.Response(readJson("dummy_data/vidio_dummy.json"), 200));
+      final result = await dataSource.getTrailerTv(id);
+
+      expect(result, trailerTv);
+    });
+
+    test("Should get tv trailer not found if status code 404", () async {
+      when(mockHttpClient.get(Uri.parse("$baseUrl/tv/$id/videos?$apiKey")))
+          .thenAnswer((_) async => http.Response("Not Found", 404));
+      final result = dataSource.getTrailerTv(id);
+
+      expect(() => result, throwsA(isA<ServerException>()));
+    });
+  });
+
+  group("get trailer episode", () {
+    const id = 1;
+    const numbSeason = 1;
+    const numbEpisode = 1;
+    final trailerTv = VideoModel.fromJson(
+        json.decode(readJson("dummy_data/vidio_dummy.json")));
+
+    test("get video trailer for tv series when response successful", () async {
+      when(mockHttpClient.get(Uri.parse(
+              "$baseUrl/tv/$id/season/$numbSeason/episode/$numbEpisode/videos?$apiKey")))
+          .thenAnswer((_) async =>
+              http.Response(readJson("dummy_data/vidio_dummy.json"), 200));
+      final result =
+          await dataSource.getTrailerEpisode(id, numbSeason, numbEpisode);
+
+      expect(result, trailerTv);
+    });
+
+    test("Should get tv trailer not found if status code 404", () async {
+      when(mockHttpClient.get(Uri.parse(
+              "$baseUrl/tv/$id/season/$numbSeason/episode/$numbEpisode/videos?$apiKey")))
+          .thenAnswer((_) async => http.Response("Not Found", 404));
+      final result = dataSource.getTrailerEpisode(id, numbSeason, numbEpisode);
+
+      expect(() => result, throwsA(isA<ServerException>()));
+    });
+  });
 }
