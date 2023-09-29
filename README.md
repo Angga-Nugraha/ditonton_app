@@ -13,8 +13,8 @@ Menggunakan konsep Clean architecture dan Modularization disertai dengan Unit Te
 
 Jika anda ingin mencoba aplikasi ini :
 * Clone this Repository
-* In terminal run this command flutter pub get
-* and flutter run
+* In terminal run this command "flutter pub get"
+* and "flutter run"
   
 ## View aplikasi
 ![Screenshot_1690632146](https://github.com/Angga-Nugraha/ditonton_app/assets/76716099/485cfb4d-5c46-4989-be42-dd165e37eb23)
