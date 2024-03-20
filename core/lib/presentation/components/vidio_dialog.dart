@@ -2,6 +2,8 @@ part of 'components_helper.dart';
 
 Future<dynamic> buildVideoDialog(BuildContext context, Video video) {
   return showDialog(
+  barrierDismissible: false,
+  barrierColor: Colors.black.withOpacity(0.8),
     context: context,
     builder: (context) {
       return Dialog(

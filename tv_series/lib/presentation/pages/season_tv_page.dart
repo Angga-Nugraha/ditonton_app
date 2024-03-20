@@ -42,10 +42,12 @@ class _SeasonTVPageState extends State<SeasonTVPage> {
             return SafeArea(
               child: Stack(
                 children: [
-                  buildCardImage(season.posterPath!, screenWidth: screenWidth),
+                  buildCardImage(season.posterPath ?? "", screenWidth: screenWidth),
                   Container(
-                    margin: const EdgeInsets.only(top: 48 + 8),
+                   margin: const EdgeInsets.only(top: 50),
                     child: DraggableScrollableSheet(
+                    initialChildSize: 0.5,
+                    minChildSize: 0.5,
                         builder: (context, scrollController) {
                       return Container(
                         decoration: const BoxDecoration(
@@ -145,7 +147,7 @@ class _SeasonTVPageState extends State<SeasonTVPage> {
   Widget _buildEpisode(
       double screenWidth, int numbSeason, List<Episode> episode) {
     return SizedBox(
-      height: 350,
+      height: 500,
       width: screenWidth,
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
@@ -172,7 +174,7 @@ class _SeasonTVPageState extends State<SeasonTVPage> {
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
-                            buildCardImage(episode[index].stillPath!),
+                            buildCardImage(episode[index].stillPath ?? ""),
                             const Icon(
                               Icons.play_circle_outline,
                               size: 40,

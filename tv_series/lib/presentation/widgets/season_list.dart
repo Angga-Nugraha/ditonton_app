@@ -37,7 +37,7 @@ class SeasonList extends StatelessWidget {
                     },
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: buildCardImage(poster!),
+                      child: buildCardImage(poster ?? ""),
                     ),
                   ),
                 ),

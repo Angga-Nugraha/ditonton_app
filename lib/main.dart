@@ -94,7 +94,13 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         theme: ThemeData.dark().copyWith(
           colorScheme: kColorScheme,
-          primaryColor: kRichBlack,
+          primaryColor: kMikadoYellow,
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: kMikadoYellow,
+              foregroundColor: kRichBlack,
+            )
+          ),
           scaffoldBackgroundColor: kRichBlack,
           textTheme: kTextTheme,
         ),
